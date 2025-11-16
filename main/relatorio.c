@@ -33,6 +33,10 @@ void tempoMedio(FilaAtendido *fa, int numero)
     printf("Tempo médio de atendimento da prioridade %d = %d minutos\n", numero, media);
     
 }
+
+// Exibe o total de pacientes atendidos em cada nivel
 void pacientesPorNivel(FilaAtendido* fa){
-    return fa->tamanho;
+    for(int i = 0; i < 5; i++){
+    printf("Prioridade %d:  %d Pacientes atendidos.", i, fa->tamanho[i]);
+    }
 }

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "fila.h"
 #include "pacientes.h"
 #include "relatorio.h"
@@ -61,13 +62,13 @@ int main()
             getchar();
             atribuirPrioridade(&pacientes, id);
             break;
-        case 3: 
-            
+        case 3: //Atender próximo paciente com maior prioridade
+            enfileirar(&pacientes);
         case 4: // Visualizar fila de espera, ainda verificar
             exibir(&pacientes);
             break;
-        case 5: // Total de pacientes por nivel de risco
-            pacientesPorNivel(&pacientes2);
+        case 5: // Pacientes atendidos por prioridade
+            atendimentoPrioridade(&pacientes2);
             break;
         case 6: // Tempo medio atendimento
             printf("Digite o nivel de prioridade (1-5) para calcular o tempo medio: \n");
@@ -75,8 +76,8 @@ int main()
             grtchar();
             tempoMedio(&pacientes2, nivel);
             break;
-        case 7: 
-                    
+        case 7: //Total de pacientes por nível de risco (1 a 5)\n"
+            pacientesPorNivel(&pacientes2);       
         case 0: // Sair
             printf("Voce escolheu sair!\n");
             printf("Saindo...\n");

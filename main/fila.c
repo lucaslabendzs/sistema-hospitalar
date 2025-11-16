@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "fila.h"
 #include "paciente.h"
+#include <stdbool.h>
 
 
 //Renan - Inicializar a fila
@@ -19,7 +20,8 @@ bool vazia(Fila *f){
 
 // Kauan - Enfileirar paciente na fila da sua prioridade
 bool enfileirar(Fila *f){
-    if(f || p == NULL){ // verifica se a fila ou o paciente são nulos
+    if(f == NULL){ // verifica se a fila ou o paciente são nulos
+        printf("nao existem pacientes na fila!")
         return false;
     }
     int prioridade = p->prioridade -1;
@@ -108,7 +110,7 @@ void exibir(Fila *f){
     
     for(int i = 0; i < 5; i++;){
     Paciente* pos = f->inicio[i]; // posição inicial da fila
-
+    printf("Prioridade %d", i);
     if (vazia(f)){
         printf("Fila de espera vazia\n");
         return; // sai da função se as filas estiverem vazias

@@ -8,3 +8,5 @@
 void atendimentoPrioridade(Fila *f);
 void tempoMedio(Fila *f, Paciente *p);
 void pacientesPorNivel(FilaAtendido* fa);
+
+#endif
