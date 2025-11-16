@@ -7,6 +7,7 @@
 typedef struct Paciente
 { 
     int id; // identificador único
+    int prioridade;
     char nome[MAX_NOME]; // nome do paciente
     int idade; // idade do paciente
     char sintoma[MAX_SINTOMA]; // sintoma apresentado

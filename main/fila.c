@@ -5,11 +5,11 @@
 
 
 //Renan - Inicializar a fila
-void inicializar(Fila *paciente){
+void inicializar(Fila *f){
     for(int i=0; i<5; i++){
-    paciente->inicio[i] = NULL;
-    paciente->fim[i] = NULL;
-    paciente->tamanho[i] = 0;
+    f->inicio[i] = NULL;
+    f->fim[i] = NULL;
+    f->tamanho[i] = 0;
     }
 }
 // Leticia - Verificação da fila vazia
@@ -18,7 +18,7 @@ bool vazia(Fila *f){
 }
 
 // Kauan - Enfileirar paciente na fila da sua prioridade
-bool enfileirar(Fila *f, Paciente *p){
+bool enfileirar(Fila *f){
     if(f || p == NULL){ // verifica se a fila ou o paciente são nulos
         return false;
     }
@@ -33,33 +33,56 @@ bool enfileirar(Fila *f, Paciente *p){
     f->tamanho[prioridade]++; // incrementa o tamanho da fila
     return true;
 }
-// Lucas - Remover paciente da fila após atendimento
-bool pacienteAtendido(Fila *f){
-    int prioridade =0;
-    for(int i=0; i<5; i++){
-       if(f->fim[i] != NULL){  //caso esteja vazia a fila
-            break;
-            prioridade = i;
-        }
-    }
-    if(prioridade == 0){
-        printf("znNao existem pacientes na fila!!\n");
-        return false;
-    }
-    Paciente *atual = f->inicio[prioridade]; 
-    printf("\nPaciente %s atendido!!\n Quanto tempo ele levou para ser atendido\n?", atual->nome);
-    scanf("%d", &atual->tempoAtendimento);
-    
-    f->inicio[prioridade] = atual;
-    if(f->inicio[prioridade] == NULL){ // caso fila fique vazia
-        f-fim[prioridade] =NULL; 
+void adicionarAtendido(FilaAtendido *fa, Paciente *p){
+    int pr = p->prioridade;
+     p->prox = NULL;
+
+    if (fa->fim[pr] == NULL) {
+        fa->inicio[pr] = fa->fim[pr] = p;
+    } else {
+        fa->fim[pr]->prox = p;
+        fa->fim[pr] = p;
     }
 
-    f->tamanho[prioridade] --;
+    //atualizar as estatisticas ja
+    fa->totalAtendimentos[pr]++;
+    fa->somaTempo[pr] += p->tempoAtendimento;
+} 
+// Lucas - Remover paciente da fila após atendimento
+bool pacienteAtendido(Fila *f, FilaAtendido *fa) {
+    int prioridade = 0;
+
+    // Encontrar fila mais urgente
+    for (int i = 0; i < 5; i++) {
+        if (f->inicio[i] != NULL) {
+            prioridade = i;
+            break;
+        }
+    }
+
+    if (prioridade == 0) {
+        printf("\nNao existem pacientes na fila!!\n");
+        return false;
+    }
+
+    Paciente *atual = f->inicio[prioridade];
+
+    printf("\nPaciente %s atendido!!\nQuanto tempo ele levou para ser atendido? ", atual->nome);
+    scanf("%d", &atual->tempoAtendimento);
+
+    // Remove da fila de espera
+    f->inicio[prioridade] = atual->prox;
+    if (f->inicio[prioridade] == NULL)
+        f->fim[prioridade] = NULL;
+
+    f->tamanho[prioridade]--;
+
+    // Adiciona na fila de atendidos por prioridade
+    adicionarAtendido(fa, atual);
     free(atual);
     return true;
-    
 }
+
 // Renan - Consultar o elemento na frente da fila sem removê-lo
 bool frente(Fila *f, int id){
     if(vazia(f)){
@@ -81,21 +104,22 @@ int tamanho_fila(Fila *f){
 }
 
 //Kauan - Exibir fila de espera
-void exibir(Fila *f, Paciente *p){
-     if (vazia(f)){
+void exibir(Fila *f){
+    
+    for(int i = 0; i < 5; i++;){
+    Paciente* pos = f->inicio[i]; // posição inicial da fila
+
+    if (vazia(f)){
         printf("Fila de espera vazia\n");
         return; // sai da função se as filas estiverem vazias
     }
 
     printf("==== Fila de espera ====\n");
-    
-    for(int i = 0; i < 5; i++;){
-    Paciente* pos = f->inicio[i]; // posição inicial da fila
 
     if (pos == NULL) continue; // se a fila estiver vazia pula pra proxima
         
         while (pos != NULL){
-        printf("%d  Nome: %c   Idade: %d  Sintomas: %c  Tempo de espera: %d\n", id, nome, idade, sintoma, tempoAtendimento); // exibe os dados do paciente
+        printf("%d  Nome: %c   Idade: %d  Sintomas: %c  Tempo de espera: %d\n", pos->id, pos->nome, pos->idade, pos->sintoma, pos->tempoAtendimento); // exibe os dados do paciente
         pos = pos->prox;
         }
     }

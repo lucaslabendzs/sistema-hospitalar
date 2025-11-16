@@ -1,20 +1,51 @@
 #include <stdio.h>
-#include "triagem.h"
 #include <string.h> 
+#include "triagem.h"
+#include "pacientes.h"
+#include "fila.h"
 
-int atribuirPrioridade(Paciente* p){ // autor: Leticia
-    printf("\nSintoma do paciente %s, eh %s\n", p->nome, p->sintoma); //mostra o sintoma do paciente
-    printf("Doutor, de acordo com os sintomas qual deve ser a prioridade (de acordo com o Protocolo de Manchester)\n"); // pede para o medico atribuir a prioridade
-    int prioridade = 0; // inicializa a variavel prioridade
-    while(1){ // loop infinito ate o usuario digitar um numero valido
-        scanf("%d", &prioridade); // le a prioridade digitada
-        if(prioridade < 5 || prioridade > 1){
-            printf("Numero invalido, digite novamente(1 a 5)"); // se o numero for invalido, pede para digitar novamente
-        }
-        else{ // se o numero for valido
-            printf("Prioridade atribuida ao paciente %s", p->nome); // mostra a prioridade atribuida
-            p->prioridade = prioridade; // atribui a prioridade ao paciente
-            return 1; // retorna 1 para indicar que a prioridade foi atribuida com sucesso
+
+int atribuirPrioridade(Fila *f, int id)
+{
+    // Percorrer todas as prioridades
+    for(int pr = 0; pr < 5; pr++)
+    {
+        Paciente *atual = f->inicio[pr];
+
+        // Percorrer a lista da prioridade atual
+        while(atual != NULL)
+        {
+            if(atual->id == id)   // Paciente encontrado
+            {
+                printf("\nSintoma do paciente %s: %s\n", atual->nome, atual->sintoma);
+                printf("Doutor, atribua a prioridade (1 a 5):\n");
+
+                int prioridade;
+
+                while(1)
+                {
+                    scanf("%d", &prioridade);
+
+                    if(prioridade < 1 || prioridade > 5)
+                    {
+                        printf("Número inválido! Digite novamente (1 a 5): ");
+                    }
+                    else
+                    {
+                        atual->prioridade = prioridade;
+                        printf("Prioridade %d atribuída ao paciente %s\n",
+                               prioridade, atual->nome);
+                        return 1;   // sucesso
+                    }
+                }
+            }
+
+            atual = atual->prox; // avança para próximo da fila
         }
     }
+
+    // Se chegou aqui, paciente não existe
+    printf("Paciente com ID %d não encontrado!\n", id);
+    return 0;
 }
+
