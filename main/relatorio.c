@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "fila.h"
-#include "paciente.h"
+#include "pacientes.h"
 #include "relatorio.h"
 
 // Exibir pacientes atendidos por prioridade
@@ -23,6 +23,7 @@ void atendimentoPrioridade(FilaAtendido *fa)
 }
 }
 
+// Calculo do tempo medio de atendimento por prioridade
 void tempoMedio(FilaAtendido *fa, int numero)
 {
     if(fa->fim[numero] == NULL){
