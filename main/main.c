@@ -53,7 +53,7 @@ int main()
             fgets(sintoma, sizeof(sintoma), stdin);
             sintoma[strcspn(sintoma, "\n")] = 0;
 
-            criarPaciente(&pacientes, id, nome, idade, sintoma); // cria o paciente
+            criarPaciente(id, nome, idade, sintoma); // cria o paciente
             printf("Paciente inserido: \n");
             break;
         case 2:

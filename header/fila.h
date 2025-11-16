@@ -21,7 +21,7 @@ typedef struct {
 //protótipo das funções
 void inicializar(Fila *paciente);
 bool vazia(Fila *f);
-bool enfileirar(Fila *f, Paciente *p);
+bool enfileirar(Fila *f);
 void adicionarAtendido(FilaAtendido *fa, Paciente *p);
 bool pacienteAtendido(Fila *f);
 bool frente(Fila *f, int id);

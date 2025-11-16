@@ -5,6 +5,6 @@
 
 // autor: Leticia 
 // função para atribuir prioridade ao paciente baseado no sintoma
-int atribuirPrioridade(Paciente* p);
+int atribuirPrioridade(Fila *f, int id);
 
 #endif
