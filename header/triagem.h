@@ -3,8 +3,8 @@
 #include "pacientes.h"
 #include "fila.h"
 
-// autor: Leticia 
-// função para atribuir prioridade ao paciente baseado no sintoma
+
+// Kauan - função para atribuir prioridade ao paciente baseado no sintoma
 int atribuirPrioridade(Fila *f, int id);
 
 #endif

@@ -19,9 +19,10 @@ typedef struct Lista{
     Paciente *inicio;
 }Lista;
 
-// Lista global de pacientes: inicializar/adicionar/buscar
+
 void inicializarLista(void);
 void adicionarPacienteLista(Paciente *p);
+//Busca pacientes na lista global - Kauan
 Paciente* buscarPacientePorID(int id);
 
 // Lucas - função para criar paciente
