@@ -7,6 +7,7 @@
 typedef struct Paciente
 { 
     int id; // identificador único
+    int prioridade;
     char nome[MAX_NOME]; // nome do paciente
     int idade; // idade do paciente
     char sintoma[MAX_SINTOMA]; // sintoma apresentado
@@ -14,7 +15,15 @@ typedef struct Paciente
     int tempoAtendimento; // em minutos
 }Paciente;
 
-// Lucas - função para criar paciente
-Paciente* criarPaciente(int id, char*nome, int idade, char*sintoma); 
+typedef struct Lista{
+    Paciente *inicio;
+}Lista;
 
+// Lista global de pacientes: inicializar/adicionar/buscar
+void inicializarLista(void);
+void adicionarPacienteLista(Paciente *p);
+Paciente* buscarPacientePorID(int id);
+
+// Lucas - função para criar paciente
+Paciente* criarPaciente(int id, char*nome, int idade, char*sintoma);
 #endif
