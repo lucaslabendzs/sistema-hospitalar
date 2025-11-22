@@ -13,7 +13,7 @@ void inicializar(Fila *f){
     f->tamanho[i] = 0;
     }
 }
-// Inicializar estrutura de atendidos
+// Lucas - Inicializar estrutura de atendidos
 void inicializarAtendido(FilaAtendido *fa){
     for(int i=0; i<5; i++){
         fa->inicio[i] = NULL;
@@ -50,7 +50,7 @@ bool enfileirar(Fila *f, Paciente *p){
     f->tamanho[prioridade]++; // incrementa o tamanho da fila
     return true;
 }
-//adiciona na fila de atendidos - Kauan
+// Kauan - adiciona na fila de atendidos 
 void adicionarAtendido(FilaAtendido *fa, Paciente *p){
     int pr = p->prioridade - 1;
     p->prox = NULL;
@@ -104,28 +104,6 @@ bool pacienteAtendido(Fila *f, FilaAtendido *fa) {
     return true;
 }
 
-// Renan - Consultar o elemento na frente da fila sem removê-lo
-bool frente(Fila *f, int prioridade){
-    if(vazia(f)){
-        printf("Esta vazia, nao tem elementos para consultar.\n");
-        return false;
-    }
-    
-    if (prioridade < 0 || prioridade > 4){
-        for (int i = 0; i < 5; i++){
-            if (f->inicio[i] != NULL){
-                prioridade = i;
-                break;
-            }
-        }
-    }
-    
-    if (f->inicio[prioridade] != NULL){
-        printf("ID: %d  Nome: %s\n", f->inicio[prioridade]->id, f->inicio[prioridade]->nome); //exibe id e nome do paciente
-    }
-    
-    return true;
-}
 
 
 //Leticia - Retornar o tamanho da fila
@@ -135,7 +113,7 @@ int tamanho_fila(Fila *f){
     return soma; // retorna o tamanho total das filas
 }
 
-//Kauan - Exibir fila de espera
+//Renan - Exibir fila de espera
 void exibir(Fila *f){
     if (vazia(f)){
         printf("Fila de espera vazia\n");

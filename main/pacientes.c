@@ -32,25 +32,25 @@ Paciente* criarPaciente(int id, char*nome, int idade, char*sintoma){
 
     return p;  // retorna o novo paciente criado
 }
-
+//Kauan
 // Lista global de pacientes (armazenamento simples em memória)
 // Ponteiro que sempre aponta para o início da lista ligada de pacientes
 static Paciente *listaPacientes = NULL;
-
+//Kauan
 void inicializarLista(void){
     listaPacientes = NULL;  // reinicia a lista (útil no início do programa)
 }
-
+//Kauan
 void adicionarPacienteLista(Paciente *p){
     if (p == NULL) return;  // segurança: evita inserir ponteiros inválidos
     p->prox = listaPacientes;  // novo paciente aponta para o antigo primeiro
     listaPacientes = p;        // novo paciente vira o primeiro da lista
 }
-//Busca pacientes na lista global - Kauan
+//Renan - Busca pacientes na lista global
 Paciente* buscarPacientePorID(int id){
     Paciente *atual = listaPacientes;  // começa no início da lista
     while (atual != NULL) {            // percorre toda a lista
-        if (atual->id == id) {         // se o ID bater...
+        if (atual->id == id) {         // se o ID bater
             return atual;              // retorna o paciente encontrado
         }
         atual = atual->prox;           // avança para o próximo nó da lista
