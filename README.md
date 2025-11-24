@@ -51,7 +51,7 @@ O código-fonte está organizado nos seguintes módulos:
 ## Vídeo de Demonstração
 Conforme solicitado, um vídeo demonstrando a execução completa do sistema está disponível no link abaixo:
 
-**[Inserir link do vídeo não listado do YouTube aqui]**
+https://youtu.be/TVza5ZV8K1Q
 
 ## Autores
     * Kauan Calegari 
